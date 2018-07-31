@@ -11,6 +11,8 @@ public class Main {
 		
 		System.out.println("Hello word");
 		
+		System.out.println("测试 eclipse 和  git");
+		
 	}
 	
 }
