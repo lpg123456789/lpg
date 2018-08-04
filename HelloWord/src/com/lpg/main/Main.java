@@ -9,7 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println("Hello word");
+		System.out.println("Hello word1");
 		
 		System.out.println("测试 eclipse 和  git");
 		
