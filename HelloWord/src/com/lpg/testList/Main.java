@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
+ * 遍历并且移除
  * 线程调用list，实现到期移除功能
  */
 public class Main {
