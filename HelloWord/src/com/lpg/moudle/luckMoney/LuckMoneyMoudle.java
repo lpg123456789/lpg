@@ -48,6 +48,10 @@ public class LuckMoneyMoudle {
 		}
 	}
 	
+	public void sendLuckMoney(Integer userId){
+		
+	}
+	
 	public void getLuckMoney(Integer userId,int id){
 		LuckMoney luckMoney=luckMoneyMap.get(id);
 		synchronized (luckMoney) {
