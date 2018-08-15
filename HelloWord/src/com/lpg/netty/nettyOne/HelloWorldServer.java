@@ -32,7 +32,9 @@ public class HelloWorldServer {
 //                            ch.pipeline().addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
                             ch.pipeline().addLast("decoder", new StringDecoder());
                             ch.pipeline().addLast("encoder", new StringEncoder());
-                            ch.pipeline().addLast(new HelloWorldServerHandler());
+                           // ch.pipeline().addLast(new HelloWorldServerHandler());
+                            ch.pipeline().addLast(new BaseClient1Handler());
+                            ch.pipeline().addLast(new BaseClient2Handler());
                         };
                         
                     }).option(ChannelOption.SO_BACKLOG, 128)   

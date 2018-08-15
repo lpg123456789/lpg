@@ -8,6 +8,17 @@ public class MyCollection {
 	public static void main(String[] args) {
 
 		final List<Integer> list = new ArrayList<>();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for (Integer i = 0; i < 1000; i++) {
+					System.out.println("移除数据 " + i);
+					list.remove(i);
+				}
+			}
+		}).start();
+		
 
 		new Thread(new Runnable() {
 			@Override
@@ -25,15 +36,7 @@ public class MyCollection {
 //			e.printStackTrace();
 //		}
 
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				for (Integer i = 0; i < 1000; i++) {
-					System.out.println("移除数据 " + i);
-					list.remove(i);
-				}
-			}
-		}).start();
+		
 
 		try {
 			Thread.sleep(500);
