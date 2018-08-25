@@ -1,0 +1,10 @@
+com.lpg.moudle.attributeMoule 角色属性 适用于游戏角色
+com.lpg.moudle.gift 礼包  适用于根据一个type进行解耦
+com.lpg.moudle.IProps 道具，继承关系，适用于解耦多种道具	
+com.lpg.moudle.lang	语言包
+com.lpg.moudle.majiong	麻将胡牌算法
+com.lpg.moudle.mine 挖矿功能，造兵，定时器的队列功能
+com.lpg.moudle.recharge 充值？？
+com.lpg.moudle.redPocket 红包功能，适用于玩家之间交互
+com.lpg.moudle.task	任务功能， 适用于根据一个type+不订参 进行解耦
+com.lpg.moudle.upgrade 最常见的升级功能，顺序判断执行方法
