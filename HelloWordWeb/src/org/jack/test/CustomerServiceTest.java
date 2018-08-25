@@ -1,9 +1,12 @@
 package org.jack.test;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.PropertyConfigurator;
+import org.jack.com.helper.DatabaseHelper;
 import org.jack.com.model.Customer;
 import org.jack.com.service.CustomerService;
 import org.junit.Assert;
@@ -19,15 +22,25 @@ public class CustomerServiceTest {
     public CustomerServiceTest(){
         customerService = new CustomerService();
     }
+    
+    static {
+    	String projectTest=System.getProperty("user.dir")+"\\src\\config\\log4j.properties";
+		File file = new File(projectTest);
+		if (file.exists()) {
+			PropertyConfigurator.configure(projectTest);
+		}	
+    }
  
     @Before
-    public void init(){
+    public void init() throws  Exception{
         //to do 初始化数据库
+        //DatabaseHelper.executeSqlFile("sql/customer_init.sql");
     }
  
     @Test
     public void getCustomerListTest() throws Exception{
-        List<Customer> customerList = customerService.getCustomerList("");
+    	//这个是绿色的
+        List<Customer> customerList = customerService.getCustomerList();
         Assert.assertEquals(2,customerList.size());
     }
  
