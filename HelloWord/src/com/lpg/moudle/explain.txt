@@ -7,4 +7,5 @@ com.lpg.moudle.mine 挖矿功能，造兵，定时器的队列功能
 com.lpg.moudle.recharge 充值？？
 com.lpg.moudle.redPocket 红包功能，适用于玩家之间交互
 com.lpg.moudle.task	任务功能， 适用于根据一个type+不订参 进行解耦
-com.lpg.moudle.upgrade 最常见的升级功能，顺序判断执行方法
+com.lpg.moudle.upgrade 游戏最常见的升级功能，顺序判断执行方法
+com.lpg.moudle.friend 好友系统，军团系统，群系统，本质上是处理   相互  关系 
