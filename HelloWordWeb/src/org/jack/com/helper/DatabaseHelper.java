@@ -86,7 +86,7 @@ public final class DatabaseHelper {
             LOGGER.error("query entity list failure", e);
             throw new RuntimeException(e);
         }
-        
+        LOGGER.error("query entity list failure");
         return entityList;
     }
  
