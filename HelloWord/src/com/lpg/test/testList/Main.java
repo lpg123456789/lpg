@@ -1,4 +1,4 @@
-package com.lpg.testList;
+package com.lpg.test.testList;
 
 import java.util.List;
 import java.util.Random;

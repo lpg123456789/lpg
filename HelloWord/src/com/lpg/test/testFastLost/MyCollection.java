@@ -1,4 +1,4 @@
-package com.lpg.testFastLost;
+package com.lpg.test.testFastLost;
 
 import java.util.ArrayList;
 import java.util.List;

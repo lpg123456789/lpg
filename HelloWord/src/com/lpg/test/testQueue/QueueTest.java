@@ -1,4 +1,4 @@
-package com.lpg.testQueue;
+package com.lpg.test.testQueue;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

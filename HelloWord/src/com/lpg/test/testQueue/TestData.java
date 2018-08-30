@@ -1,4 +1,4 @@
-package com.lpg.testQueue;
+package com.lpg.test.testQueue;
 
 public class TestData {
 

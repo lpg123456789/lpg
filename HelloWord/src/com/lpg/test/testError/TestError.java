@@ -1,4 +1,4 @@
-package com.lpg.testError;
+package com.lpg.test.testError;
 
 import java.util.ArrayList;
 import java.util.List;
