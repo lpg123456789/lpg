@@ -5,4 +5,6 @@ public class Email {
 	private int id;
 	
 	private int content;
+	
+	private int time;
 }
