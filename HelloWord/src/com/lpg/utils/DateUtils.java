@@ -91,6 +91,12 @@ public class DateUtils {
 	 */
 	public static boolean useNextworkTime = false;
 	
+	public static void main(String[] args) {
+		
+		System.out.println(getCurrentMillis());
+		
+	}
+	
 	/**
 	 * 获取当前毫秒数
 	 * 
@@ -121,6 +127,8 @@ public class DateUtils {
 	public static int getCurrentSecond() {
 		return millisToSecond(getCurrentMillis());
 	}
+	
+	
 
 	/**
 	 * 毫秒转换为秒
@@ -208,13 +216,6 @@ public class DateUtils {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT_PATTERN_SE);
 		return dateFormat.format(date);
 	}
-	
-	public static void main(String[] args) {
-		Calendar c = Calendar.getInstance();
-		System.out.println(c.get(Calendar.YEAR));
-		System.out.println(DateUtils.formatCurrentTime());
-	}
-	
 
 	/**
 	 * 使用格式化模版 FORMAT_PATTERN_SE 格式化日期
