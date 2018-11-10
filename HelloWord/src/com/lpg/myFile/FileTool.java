@@ -16,24 +16,27 @@ public class FileTool {
 	public static void main(String[] args) {
 		String filepath = "F:\\xianxia-workspace\\server\\game\\trunk\\game\\src\\com\\xh\\game\\module";// D盘下的file文件夹的目录
 		
+		//String filepath = "F:\\xianxia-workspace\\server\\game\\trunk\\game\\src\\com\\xh\\game\\datas";// D盘下的file文件夹的目录
+		
+		//String filepath = "F:\\xianxia-workspace\\interface\\trunk\\protocol";//协议文件
 		//文件集合
 		List<String> fileList=new ArrayList<>();
 		printFile(new File(filepath),fileList);
 		
 		//输出文件
-		System.out.println("数量 "+fileList.size());
-		for (String fileName : fileList) {
-			System.out.println("文件名 "+fileName);
-		}
+//		System.out.println("数量 "+fileList.size());
+//		for (String fileName : fileList) {
+//			System.out.println("文件名 "+fileName);
+//		}
 		
 		//文件信息
 		String keyWord="job";//注意大小写
 		for (String fileName : fileList) {
 			String[] name=fileName.split("\\.");//需要转义
-			if(name[0].endsWith("Service")) {
-				System.out.println("正在读取文件"+fileName);
+			//if(name[0].endsWith("DS")) {
+				//System.out.println("正在读取文件"+fileName);
 				readFileByLines(fileName,keyWord);
-			}
+			//}
 		}
 		
 	}
@@ -53,7 +56,7 @@ public class FileTool {
                 // 显示行号  
                // System.out.println("line " + line + ": " + tempString);  
                 if(tempString.indexOf(keyWord)!=-1) {
-                	System.out.println("------------------ line " + line);
+                	System.out.println(fileName+" ------------------ line " + line);
                 }
                 line++;  
             }  

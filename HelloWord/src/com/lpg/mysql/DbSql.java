@@ -25,9 +25,10 @@ public class DbSql {
 	 */
 	public static void testSelect() throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/aaaa", "root", "123456");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/xx_lpg_game", "root", "123456");
 		Statement state = conn.createStatement();
-		String sql = "select table_name from information_schema.tables where table_schema='aaaa' and table_type='base table'";
+		//String sql = "mysqldump -uroot -p123456 aaaa > test.sql";
+		String sql = "select table_name from information_schema.tables where table_schema='xx_lpg_game' and table_type='base table'";
 		ResultSet re = state.executeQuery(sql);
 		//用while而不是用if
 		while (re.next()) {
