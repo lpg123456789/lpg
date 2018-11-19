@@ -1,4 +1,4 @@
-package com.lpg.battle;
+package com.lpg.battle.battleOne;
 
 public class BattleMain {
 

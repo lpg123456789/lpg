@@ -1,4 +1,4 @@
-package com.lpg.battle;
+package com.lpg.battle.battleOne;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

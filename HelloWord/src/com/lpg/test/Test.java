@@ -27,11 +27,7 @@ public class Test {
 		
 		
 		
-		for (int i = 1; i <=15 ; i++) {
-			
-			if(i==3||i==6||i==9) {
-				continue;
-			}
+		for (int i = 1; i <=2000 ; i++) {
 			
 			Cat c=new Cat("猫"+i);
 			map.put(i, c);
@@ -82,16 +78,18 @@ public class Test {
 		
 		//4名挑战第2名
 		
-		test(10, 2, map);
+		test(999, 2, map);
 		 
 	}
 	
 	public static void test2(int myRankPos,int challengRank,Map<Integer,Cat> map) {
+		
+		System.out.println("**************************");
 		// 倒序
 		long begin=System.currentTimeMillis();
 		
 		Cat tempCat = map.get(myRankPos);
-		HashSet<Integer> record=new HashSet<>();
+		//HashSet<Integer> record=new HashSet<>();
 		for (int i = myRankPos-1; i >= challengRank; i--) {
 			Cat cat = map.remove(i);
 			if(cat==null) {
