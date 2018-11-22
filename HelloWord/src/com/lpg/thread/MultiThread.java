@@ -11,12 +11,11 @@ public class MultiThread {
 				myPrint();
 			}
 		}).start();
-		myPrint();
+		
 		new Thread(new Runnable() {		
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				
+				myPrint();
 			}
 		}).start();
 		

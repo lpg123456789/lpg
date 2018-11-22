@@ -14,11 +14,11 @@ import java.util.List;
 public class FileTool {
 
 	public static void main(String[] args) {
-		String filepath = "F:\\xianxia-workspace\\server\\game\\trunk\\game\\src\\com\\xh\\game\\module";// D盘下的file文件夹的目录
+		//String filepath = "F:\\xianxia-workspace\\server\\game\\trunk\\game\\src\\com\\xh\\game\\module";// D盘下的file文件夹的目录
 		
 		//String filepath = "F:\\xianxia-workspace\\server\\game\\trunk\\game\\src\\com\\xh\\game\\datas";// D盘下的file文件夹的目录
 		
-		//String filepath = "F:\\xianxia-workspace\\interface\\trunk\\protocol";//协议文件
+		String filepath = "F:\\xianxia-workspace\\interface\\trunk\\protocol";//协议文件
 		//文件集合
 		List<String> fileList=new ArrayList<>();
 		printFile(new File(filepath),fileList);
@@ -30,7 +30,7 @@ public class FileTool {
 //		}
 		
 		//文件信息
-		String keyWord="job";//注意大小写
+		String keyWord="PET_AWAKE";//注意大小写
 		for (String fileName : fileList) {
 			String[] name=fileName.split("\\.");//需要转义
 			//if(name[0].endsWith("DS")) {
