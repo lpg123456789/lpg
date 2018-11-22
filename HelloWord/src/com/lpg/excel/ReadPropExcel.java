@@ -21,16 +21,48 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ReadPropExcel {
 	
 	public static final String fileName="E:\\文档\\trunk\\配置模板表\\D-道具配置.xlsx";
-	public static final String propId="40001";
+	public static final String propId="49999";
+	public static final String cellFlag="id";
 
 	private static final String EXCEL_XLS = "xls";
 	private static final String EXCEL_XLSX = "xlsx";
 
 	public static void main(String[] args) {
+		System.out.println("开始读取配置，可能读取的行数和excel的行数不一样，因为excel表格的行或列有空串");
+		System.out.println();
 		File file = new File(ReadPropExcel.fileName);
 		ReadPropExcel.readExcel(file);
 	}
+	
+	/**
+	 * 根据flagInfo 获取flag的标志
+	 * @param sheet
+	 * @return
+	 */
+	public static int getFlagCellIndex(Sheet sheet) {
+		int flagCell=-1;
+		//必须有这两行，没有证明美欧数据
+		if(sheet.getRow(0)==null||sheet.getRow(1)==null) {
+			return flagCell;
+		}
+		Row zeroRow=sheet.getRow(0);
+		for (int j = 0; j < zeroRow.getPhysicalNumberOfCells(); j++) {
+			Cell cell = zeroRow.getCell(j);
+			//防止有空串的隐藏列
+			if(cell==null) {
+				continue;
+			}
+			cell.setCellType(Cell.CELL_TYPE_STRING);
+			//System.out.println(cell.getStringCellValue());
+			if(cell.getStringCellValue().equals(cellFlag)){
+				flagCell=j;
+				break;
+			}
+		}
+		return flagCell;
+	}
 
+	// 注意：System.out.println内部实现
 	// 去读Excel的方法readExcel，该方法的入口参数为一个File对象
 	public static void readExcel(File file) {
 		try {
@@ -41,48 +73,26 @@ public class ReadPropExcel {
 			for (int index = 0; index < sheet_size; index++) {
 				// 每个页签创建一个Sheet对象
 				Sheet sheet = wb.getSheetAt(index);
-				if(sheet.getRow(0)==null||sheet.getRow(1)==null) {
+				int flagCell=getFlagCellIndex(sheet);
+				if(flagCell==-1) {
 					continue;
 				}
-				//确认id在哪一列
-				int flagCell=-1;
-				Row zeroRow=sheet.getRow(0);
-				for (int j = 0; j < zeroRow.getPhysicalNumberOfCells(); j++) {
-					Cell cell = zeroRow.getCell(j);
-					//隐藏列
-					if(cell==null) {
-						continue;
-					}
-					cell.setCellType(Cell.CELL_TYPE_STRING);
-					System.out.println(cell.getStringCellValue());
-					if(cell.getStringCellValue().equals("id")) {
-						flagCell=j;
-						break;
-					}
-				}
-				if(flagCell==-1){
-					continue;
-				}
-				// sheet.getRows()返回该页的总行数
-				int rowNumber = sheet.getLastRowNum(); // 第一行从0开始算
+				int rowNumber = sheet.getPhysicalNumberOfRows(); // 第一行从0开始算
+				System.out.println("正在解析表 "+sheet.getSheetName()+ "行数是 "+rowNumber);
 				for (int i = 2; i <= rowNumber; i++) {
+					//防止有空串的行
 					Row row = sheet.getRow(i);
 					if(row==null) {
 						break;
 					}
-					
+					//防止有空串的列
 					Cell cell = row.getCell(flagCell);
-					
 					if(cell==null) {
 						break;
 					}
-					
-					Cell cell2 = row.getCell(3);
 					cell.setCellType(Cell.CELL_TYPE_STRING);
-					cell2.setCellType(Cell.CELL_TYPE_STRING);
-					//System.out.println(index+" "+i+" ");
 					if(cell.getStringCellValue().equals(propId)) {
-						System.out.println(index+" "+(i+1)+" 测试测试");
+						System.err.println("位置在 "+sheet.getSheetName()+ "表 , 第 "+(i+1)+" 行");
 					}
 				}
 			}
