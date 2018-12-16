@@ -8,4 +8,11 @@ package com.lpg.xinhaiTool;
  */
 public class CompareData {
 
+	
+	public static void main(String[] args) {
+		
+		
+			
+	}
+	
 }
