@@ -23,7 +23,7 @@ public class ReadPropExcel {
 	//查询的表
 	public static final String fileName="F:\\xianxia\\配置模板表\\D-道具配置.xlsx";
 	//查询哪一列
-	public static final String value="狸猫";
+	public static final String value="功德";
 	//查询该列的标签，也就是第0行
 	public static final String cellFlag="name|string";
 

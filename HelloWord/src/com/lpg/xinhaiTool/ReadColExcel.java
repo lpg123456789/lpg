@@ -17,8 +17,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- * 获取excel某一列的数据，用于和其它数据表进行比较 例如：某一张sheet表配置的道具id，但是道具总表里面没有该道具id
- * 
+ * 获取excel某一列的数据，用于和其它数据表进行比较 
+ * 例如：某一张sheet表配置的道具id，但是道具总表里面没有该道具id
  * @author lpg 2018年11月28日
  */
 public class ReadColExcel {

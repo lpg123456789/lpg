@@ -21,7 +21,7 @@ public class CheckSheetName {
 
 	public static final String fileDir = "F:\\xianxia\\配置模板表";
 	public static final String sheetName = "导表配置";
-	public static final String keyWord = "充值返利";
+	public static final String keyWord = "monsterRefresh";
 
 	private static final String EXCEL_XLS = "xls";
 	private static final String EXCEL_XLSX = "xlsx";
