@@ -21,7 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ReadAllPropExcel {
 
 	public static final String fileName="F:\\xianxia\\配置模板表\\D-道具配置.xlsx";
-	public static final String value="青";
+	public static final String value="30001";
 
 	private static final String EXCEL_XLS = "xls";
 	private static final String EXCEL_XLSX = "xlsx";

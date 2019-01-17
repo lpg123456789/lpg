@@ -3,7 +3,7 @@ package com.lpg.test.testObject.two;
 public class MainTwo {
 
 	public static void main(String[] args) {
-		Father myObject = new UserMate();
+		Father myObject = new UserMirror();
 		testFather(myObject);
 	}
 
@@ -27,6 +27,11 @@ public class MainTwo {
 			System.out.println("属于UserMate");
 		} else {
 			System.out.println("不属于UserMate");
+		}
+		if (myObject instanceof UserMirror) {
+			System.out.println("属于UserMirror");
+		} else {
+			System.out.println("不属于UserMirror");
 		}
 	}
 

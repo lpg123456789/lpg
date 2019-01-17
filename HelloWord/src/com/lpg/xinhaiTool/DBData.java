@@ -12,7 +12,7 @@ import java.sql.Statement;
  */
 public class DBData {
 	
-	public static String tableName="practiceTask";
+	public static String tableName="skill";
 
 	public static void main(String[] args) throws Exception {
 		SelectConfig();
