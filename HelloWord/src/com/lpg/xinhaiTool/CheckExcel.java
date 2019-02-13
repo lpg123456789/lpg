@@ -71,7 +71,7 @@ public class CheckExcel {
 				Map<Integer, CellType> map = getMapType(sheet);
 				int rowNumber = sheet.getPhysicalNumberOfRows(); // 第一行从0开始算
 				System.out.println("正在解析表 " + sheet.getSheetName() + "行数是 " + rowNumber + " 定义的类型是 " + map.values());
-				for (int i = 2; i <= 10; i++) {
+				for (int i = 2; i <= rowNumber; i++) {
 					// 防止有空串的行
 					Row row = sheet.getRow(i);
 					if (row == null) {

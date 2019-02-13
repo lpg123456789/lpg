@@ -25,7 +25,7 @@ public class DbSqlTwo {
 	 */
 	public static void testSelect() throws Exception {
 		String tableSchema="xx_s1_game";
-		String columnName="jobId";
+		String columnName="job";
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.1.3:3306/"+tableSchema+"", "xianxia", "xianxia_gg^");
 		Statement state = conn.createStatement();
