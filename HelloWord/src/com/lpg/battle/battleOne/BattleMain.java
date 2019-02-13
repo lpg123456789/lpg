@@ -18,7 +18,7 @@ public class BattleMain {
 	}
 	
 	private static MyBattleTask getBattle1() {
-		MyBattleRole attacker=new MyBattleRole("战士212321",10,1);
+		MyBattleRole attacker=new MyBattleRole("战士21222321",10,1);
 		MyBattleRole target=new MyBattleRole("怪物2",5,1);	
 		MyBattleTask battleTask=new MyBattleTask(target, attacker);
 		return battleTask;
