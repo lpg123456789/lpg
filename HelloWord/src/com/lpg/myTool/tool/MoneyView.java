@@ -1,6 +1,5 @@
 package com.lpg.myTool.tool;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,13 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -32,7 +31,9 @@ public class MoneyView extends JFrame {
 	JPanel topPanel = null;
 	JPanel bottomPanel = null;
 	JTable table=null;
+	JCheckBox checkBox=null;
 	
+	List<MoneyData> moneyDataList=new Vector<>();
 	Vector<Vector<String>> data=new Vector<>();
 
 	public MoneyView() {
@@ -40,13 +41,12 @@ public class MoneyView extends JFrame {
 	}
 	
 	public void refreshMoneyView() {
-		this.setVisible(false);
 		initMoneyView();
 	}
 	
 	public void initMoneyView() {
-		List<MoneyData> moneyDataList=MoneyFile.readFileByLine();
-		initData(moneyDataList);
+		moneyDataList.addAll(MoneyFile.readFileByLine());
+		initData();
 		creatTopPanel();
 		createBottomPanel();
 		init();
@@ -55,9 +55,9 @@ public class MoneyView extends JFrame {
 	/**
 	 * 初始化数据
 	 */
-	private void initData(List<MoneyData> moneyDataList) {
+	public void initData() {
 		data.clear();
-		for (MoneyData moneyData : moneyDataList) {
+		for (MoneyData moneyData : this.moneyDataList) {
 			Vector<String> v=new Vector<String>();
 			v.add(moneyData.day);
 			v.add(moneyData.zhiFuBao);
@@ -65,6 +65,7 @@ public class MoneyView extends JFrame {
 			v.add(moneyData.gongShang);
 			v.add(moneyData.zhongGuo);
 			v.add(moneyData.zhaoShang);
+			v.add(moneyData.totalMoney);
 			v.add(moneyData.desc);
 			data.add(v);
 		}
@@ -80,25 +81,20 @@ public class MoneyView extends JFrame {
 		vector.add("工商银行");
 		vector.add("中国银行");
 		vector.add("招商银行");
+		vector.add("总额");
 		vector.add("备注");
 			
 		// 创建表格
 		table = new JTable(new DefaultTableModel(data, vector));
 		table.getColumnModel().getColumn(0).setPreferredWidth(150);
-		table.getColumnModel().getColumn(6).setPreferredWidth(200);
-	
+		table.getColumnModel().getColumn(7).setPreferredWidth(200);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int count=table.getSelectedRow();//获取你选中的行号（记录）
-				String zhiFuBao= table.getValueAt(count, 1).toString();//读取你获取行号的某一列的值（也就是字段）
-				String weiXin= table.getValueAt(count, 2).toString();//读取你获取行号的某一列的值（也就是字段）
-				String gongShang= table.getValueAt(count, 3).toString();//读取你获取行号的某一列的值（也就是字段）
-				String zhongGuo= table.getValueAt(count, 4).toString();//读取你获取行号的某一列的值（也就是字段）
-				String zhaoShang= table.getValueAt(count, 5).toString();//读取你获取行号的某一列的值（也就是字段）
-				String desc= table.getValueAt(count, 6).toString();//读取你获取行号的某一列的值（也就是字段）
-				new MoneyAdd(zhiFuBao,weiXin,gongShang,zhongGuo,zhaoShang,desc);
+				MoneyData moneyData=moneyDataList.get(count);
+				new MoneyAdd(moneyData);
 			}		
 		});
 		
@@ -116,6 +112,7 @@ public class MoneyView extends JFrame {
 	}
 
 	private void createBottomPanel() {
+		checkBox = new JCheckBox("勾选得到上一次的值");// 创建复选按钮
 		// 创建查询按钮
 		JButton actionButton = new JButton("新增");
 		// 创建退出按钮
@@ -129,15 +126,17 @@ public class MoneyView extends JFrame {
 		// 设置 bottomPanel 为水平布局
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		// 将查询按钮加入到 buttonPanel
+		checkBox.setHorizontalAlignment(SwingConstants.LEFT);
 		actionButton.setHorizontalAlignment(SwingConstants.CENTER);
+		buttonPanel.add(checkBox);
 		buttonPanel.add(actionButton);
-		actionButton.addActionListener(new newButtonFrame());
+		actionButton.addActionListener(new newButtonFrame(this));
 		// 加入一个 glue, glue 会挤占两个按钮之间的空间
 		// buttonPanel.add(Box.createHorizontalGlue());
 		// 将退出按钮加入到 buttonPanel
 		buttonPanel.add(refreshButton);
 		
-		refreshButton.addMouseListener(new myMouseAdapter(this));
+		refreshButton.addActionListener(new myMouseAdapter(this));
 		
 		// 加入一个 Strut，从而使 bottomPanel 和 middlePanel 上下之间留出距离
 		bottomPanel.add(Box.createVerticalStrut(10));
@@ -172,7 +171,7 @@ public class MoneyView extends JFrame {
 		JFrame frame = new JFrame("资料数据");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panelContainer.setOpaque(true);
-		frame.setSize(new Dimension(600, 400));
+		frame.setSize(new Dimension(1000, 800));
 		frame.setContentPane(panelContainer);
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -182,14 +181,31 @@ public class MoneyView extends JFrame {
 }
 
 class newButtonFrame implements ActionListener{
+	
+	MoneyView moneyView;
+	
+	public newButtonFrame(MoneyView moneyView) {
+		this.moneyView = moneyView;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new MoneyAdd();
+		if(moneyView.checkBox.isSelected()){
+			int index=moneyView.moneyDataList.size()-1;
+			MoneyData moneyData=moneyView.moneyDataList.get(index);
+			if(moneyData!=null){
+				new MoneyAdd(moneyData);
+			}else{
+				new MoneyAdd();
+			}
+		}else{
+			new MoneyAdd();
+		}
 	}
 	
 }
 
-class myMouseAdapter extends MouseAdapter{
+class myMouseAdapter implements ActionListener{
 	
 	MoneyView moneyView;
 	
@@ -198,8 +214,14 @@ class myMouseAdapter extends MouseAdapter{
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		
+	public void actionPerformed(ActionEvent e) {
+		moneyView.moneyDataList.clear();
+		DefaultTableModel DefaultTableModel=(DefaultTableModel) moneyView.table.getModel();
+		DefaultTableModel.getDataVector().clear();
+		moneyView.moneyDataList.addAll(MoneyFile.readFileByLine());
+		moneyView.initData();
+		DefaultTableModel.getDataVector().addAll(moneyView.data);
+		moneyView.table.repaint();
 	}
 	
 }

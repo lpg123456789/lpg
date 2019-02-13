@@ -10,17 +10,20 @@ import java.sql.Statement;
  * @author lpg
  * 2018年11月28日
  */
-public class DBData {
+public class DBConfigData {
 	
+	public static String dbBase="xx_config_1";
+	public static String userName="xianxia";
+	public static String password="xianxia_gg^";
 	public static String tableName="active";
-
+	
 	public static void main(String[] args) throws Exception {
 		SelectConfig();
 	}
 	
 	public static void SelectConfig() throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.1.3:3306/xx_config_1", "xianxia", "xianxia_gg^");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.1.3:3306/"+dbBase, userName, password);
 		Statement state = conn.createStatement();
 		//String sql = "mysqldump -uroot -p123456 aaaa > test.sql";
 		String sql = "select * from "+tableName;

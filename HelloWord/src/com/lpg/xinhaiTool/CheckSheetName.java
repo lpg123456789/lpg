@@ -13,7 +13,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- * 通过sheetName查找那张表
+ * 通过sheetName查找所在excel表
  * 
  * @author lpg 2018年12月14日
  */
