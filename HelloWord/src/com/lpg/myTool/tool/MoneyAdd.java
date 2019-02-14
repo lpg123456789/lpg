@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
@@ -22,6 +24,7 @@ public class MoneyAdd extends JFrame {
 	private String zhongGuoData=""; 
 	private String zhaoShangData=""; 
 	private String descData=""; 
+	private String detail="";
 	
 	/**
 	 * 
@@ -42,11 +45,22 @@ public class MoneyAdd extends JFrame {
 		init();
 	}
 	
+	public MoneyAdd(MoneyData moneyData){
+		this.zhiFuBaoData=moneyData.zhiFuBao;
+		this.weiXinData=moneyData.weiXin;
+		this.gongShangData=moneyData.gongShang;
+		this.zhongGuoData=moneyData.zhongGuo;
+		this.zhaoShangData=moneyData.zhaoShang;
+		this.descData=moneyData.desc;
+		this.detail=moneyData.detail;
+		init();
+	}
+	
 
 	public void init() {
 		// 设置顶部提示文字和主窗体的宽，高，x值，y值
 		setTitle("数据信息");
-		setBounds(300, 200, 300, 400);
+		setBounds(300, 400, 300, 500);
 		Container cp = getContentPane(); // 添加一个cp容器
 		cp.setLayout(null); // 设置添加的cp容器为流布局管理器
 
@@ -85,6 +99,14 @@ public class MoneyAdd extends JFrame {
 		final JTextField jt6 = new JTextField();
 		jt6.setBounds(100, 210, 150, 18); // 设置宽，高，x值，y值
 		jt6.setText(descData);
+		
+		
+		JLabel jl7 = new JLabel("详细：");
+		jl7.setBounds(40, 250, 200, 18);
+		final JTextArea jt7 = new JTextArea();
+		//jt7.setLineWrap(true);
+		jt7.setBounds(100, 250,150,100); // 设置宽，高，x值，y值
+		jt7.setText(detail);
 
 		// label加入容器
 		cp.add(jl1);
@@ -93,6 +115,7 @@ public class MoneyAdd extends JFrame {
 		cp.add(jl4);
 		cp.add(jl5);
 		cp.add(jl6);
+		cp.add(jl7);
 
 		// text加入容器
 		cp.add(jt1);
@@ -101,23 +124,24 @@ public class MoneyAdd extends JFrame {
 		cp.add(jt4);
 		cp.add(jt5);
 		cp.add(jt6);
+		cp.add(jt7);
 
 		// 确定按钮
 		JButton jb = new JButton("确定"); // 添加一个确定按钮
-		jb.setBounds(80, 300, 60, 18); // 设置确定按钮的宽，高，x值，y值
+		jb.setBounds(80, 400, 60, 18); // 设置确定按钮的宽，高，x值，y值
 		getContentPane().add(jb); // 将确定按钮添加到cp容器中
 
 		jb.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MoneyData moneyData = new MoneyData(jt1.getText(), jt2.getText(), jt3.getText(), jt4.getText(), jt5.getText(), jt6.getText());
+				MoneyData moneyData = new MoneyData(jt1.getText(), jt2.getText(), jt3.getText(), jt4.getText(), jt5.getText(), jt6.getText(),jt7.getText());
 				MoneyFile.writeInFileByfb(moneyData);
 			}
 		});
 
 		// 重置按钮
 		JButton button = new JButton("重置");
-		button.setBounds(150, 300, 60, 18); // 设置重置按钮的宽，高，x值，y值
+		button.setBounds(150, 400, 60, 18); // 设置重置按钮的宽，高，x值，y值
 		getContentPane().add(button);
 
 		setVisible(true);

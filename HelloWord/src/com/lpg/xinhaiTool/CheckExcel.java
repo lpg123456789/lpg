@@ -19,8 +19,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- * 检查excel的格式问题 有的时候是当作 CellType.BLANK 有时候是 CellType.String String类型可以配Integer，但是Integer类型不能配String
- * 
+ * 检查excel的格式问题
+ * 有的时候是当作 CellType.BLANK 
+ * 有时候是 CellType.String String类型可以配Integer，但是Integer类型不能配String
  * @author lpg 2018年12月5日
  */
 public class CheckExcel {

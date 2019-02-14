@@ -2,21 +2,27 @@ package com.lpg.myTool.tool;
 
 public class MoneyData {
 	
-	public String day;
+	public boolean flag=false;
+	
+	public String day="";
 
-	public String zhiFuBao;
+	public String zhiFuBao="";
 	
-	public String weiXin;
+	public String weiXin="";
 	
-	public String gongShang;
+	public String gongShang="";
 	
-	public String zhongGuo;
+	public String zhongGuo="";
 	
-	public String zhaoShang;
+	public String zhaoShang="";
 	
-	public String desc;
+	public String desc="";
 	
-	public MoneyData(String zhiFuBao,String weiXin,String gongShang,String zhongGuo,String zhaoShang,String desc) {
+	public String detail="";
+	
+	public String totalMoney="";
+	
+	public MoneyData(String zhiFuBao,String weiXin,String gongShang,String zhongGuo,String zhaoShang,String desc,String detail) {
 		this.day = MoneyFile.getTodayStr();
 		this.zhiFuBao=zhiFuBao;
 		this.weiXin=weiXin;
@@ -24,6 +30,7 @@ public class MoneyData {
 		this.zhongGuo=zhongGuo;
 		this.zhaoShang=zhaoShang;
 		this.desc=desc;
+		this.detail=detail;
 	}
 	
 	public MoneyData(String day) {
@@ -37,8 +44,21 @@ public class MoneyData {
 		sb.append("工商银行 ：").append(gongShang).append("\r\n");
 		sb.append("中国银行 ：").append(zhongGuo).append("\r\n");
 		sb.append("招商银行 ：").append(zhaoShang).append("\r\n");
+		sb.append("总额 ：").append(getTotal()).append("\r\n");
 		sb.append("备注 ：").append(desc).append("\r\n");
+		sb.append("\r\n");
+		sb.append("*****************************").append("\r\n");
+		sb.append("\r\n");
+		sb.append("具体 ：").append("\r\n").append(detail).append("\r\n");
 		return sb.toString();
+	}
+	
+	public int getTotal(){
+		return StrToInt(zhiFuBao)+StrToInt(weiXin)+StrToInt(gongShang)+StrToInt(zhongGuo)+StrToInt(zhaoShang);
+	}
+	
+	public int StrToInt(String str){
+		return Integer.parseInt(str);
 	}
 	
 	public void initData(String str) {
@@ -57,8 +77,24 @@ public class MoneyData {
 		if(str.startsWith("招商银行")) {
 			this.zhaoShang=getRealData(str);
 		}
+		if(str.startsWith("总额")) {
+			this.totalMoney=getRealData(str);
+		}
 		if(str.startsWith("备注")) {
 			this.desc=getRealData(str);
+		}
+		if(str.startsWith("备注")) {
+			this.desc=getRealData(str);
+		}
+		//打印具体的信息
+		if(str.startsWith("具体")){
+			flag=true;
+			return;
+		}
+		if(flag){
+			StringBuilder sb=new StringBuilder();
+			sb.append(str).append("\r\n");
+			detail+=sb.toString();
 		}
 	}
 	
