@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 /**
- * ÓÃÓÚ»ñÈ¡accessTokenµÄServlet Created by xdp on 2016/1/25.
+ * ç”¨äºè·å–accessTokençš„Servlet Created by xdp on 2016/1/25.
  */
 @WebServlet(name = "AccessTokenServlet", urlPatterns = { "/AccessTokenServlet" }, loadOnStartup = 1, initParams = {
 		@WebInitParam(name = "appId", value = "wx06f58f75a53e830b"),
@@ -22,34 +22,34 @@ public class AccessTokenServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		System.out.println("Æô¶¯WebServlet");
+		System.out.println("å¯åŠ¨WebServlet");
 		super.init();
 
 		final String appId = getInitParameter("appId");
 		final String appSecret = getInitParameter("appSecret");
 
-		// ¿ªÆôÒ»¸öĞÂµÄÏß³Ì
+		// å¼€å¯ä¸€ä¸ªæ–°çš„çº¿ç¨‹
 //		new Thread(new Runnable() {
 //			@Override
 //			public void run() {
 //				while (true) {
 //					try {
-//						// »ñÈ¡accessToken
+//						// è·å–accessToken
 //						AccessTokenInfo.accessToken = getAccessToken(appId, appSecret);
-//						// »ñÈ¡³É¹¦
+//						// è·å–æˆåŠŸ
 //						if (AccessTokenInfo.accessToken != null) {
-//							// »ñÈ¡µ½access_token ĞİÃß7000Ãë,´óÔ¼2¸öĞ¡Ê±×óÓÒ
+//							// è·å–åˆ°access_token ä¼‘çœ 7000ç§’,å¤§çº¦2ä¸ªå°æ—¶å·¦å³
 //							Thread.sleep(7000 * 1000);
-//							// Thread.sleep(10 * 1000);//10ÃëÖÓ»ñÈ¡Ò»´Î
+//							// Thread.sleep(10 * 1000);//10ç§’é’Ÿè·å–ä¸€æ¬¡
 //						} else {
-//							// »ñÈ¡Ê§°Ü
-//							Thread.sleep(1000 * 3); // »ñÈ¡µÄaccess_tokenÎª¿Õ ĞİÃß3Ãë
+//							// è·å–å¤±è´¥
+//							Thread.sleep(1000 * 3); // è·å–çš„access_tokenä¸ºç©º ä¼‘çœ 3ç§’
 //						}
 //					} catch (Exception e) {
-//						System.out.println("·¢ÉúÒì³££º" + e.getMessage());
+//						System.out.println("å‘ç”Ÿå¼‚å¸¸ï¼š" + e.getMessage());
 //						e.printStackTrace();
 //						try {
-//							Thread.sleep(1000 * 10); // ·¢ÉúÒì³£ĞİÃß1Ãë
+//							Thread.sleep(1000 * 10); // å‘ç”Ÿå¼‚å¸¸ä¼‘çœ 1ç§’
 //						} catch (Exception e1) {
 //
 //						}
@@ -61,24 +61,24 @@ public class AccessTokenServlet extends HttpServlet {
 	}
 
 	/**
-	 * »ñÈ¡access_token
+	 * è·å–access_token
 	 *
 	 * @return AccessToken
 	 */
 	private AccessToken getAccessToken(String appId, String appSecret) {
 		NetWorkHelper netHelper = new NetWorkHelper();
 		/**
-		 * ½Ó¿ÚµØÖ·Îªhttps://api.weixin.qq.com/cgi-bin/token?grant_type=
-		 * client_credential&appid=APPID&secret=APPSECRET£¬
-		 * ÆäÖĞgrant_type¹Ì¶¨Ğ´Îªclient_credential¼´¿É¡£
+		 * æ¥å£åœ°å€ä¸ºhttps://api.weixin.qq.com/cgi-bin/token?grant_type=
+		 * client_credential&appid=APPID&secret=APPSECRETï¼Œ
+		 * å…¶ä¸­grant_typeå›ºå®šå†™ä¸ºclient_credentialå³å¯ã€‚
 		 */
 		String Url = String.format(
 				"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s", appId,
 				appSecret);
-		// ´ËÇëÇóÎªhttpsµÄgetÇëÇó£¬·µ»ØµÄÊı¾İ¸ñÊ½Îª{"access_token":"ACCESS_TOKEN","expires_in":7200}
+		// æ­¤è¯·æ±‚ä¸ºhttpsçš„getè¯·æ±‚ï¼Œè¿”å›çš„æ•°æ®æ ¼å¼ä¸º{"access_token":"ACCESS_TOKEN","expires_in":7200}
 		String result = netHelper.getHttpsResponse(Url, "");
-		System.out.println("»ñÈ¡µ½µÄaccess_token=" + result);
-		// Ê¹ÓÃFastJson½«Json×Ö·û´®½âÎö³ÉJson¶ÔÏó
+		System.out.println("è·å–åˆ°çš„access_token=" + result);
+		// ä½¿ç”¨FastJsonå°†Jsonå­—ç¬¦ä¸²è§£ææˆJsonå¯¹è±¡
 		JSONObject json = JSON.parseObject(result);
 		AccessToken token = new AccessToken();
 		token.setAccessToken(json.getString("access_token"));
