@@ -15,7 +15,13 @@ public class DbSql {
 
 	//SQL异常:Operation not allowed after ResultSet closed
 	public static void main(String[] args) throws Exception {
-		testSelect();
+		
+		for (int i = 0; i < 100; i++) {
+			Thread.sleep(1000);
+			testSelect();
+		}
+		
+		
 	}
 	
 	/**
@@ -38,7 +44,7 @@ public class DbSql {
 			ResultSet re2=state2.executeQuery(sql2);
 			re2.last(); 
 			int rowCount = re2.getRow(); //获得ResultSet的总行数
-			System.out.println(tableName+" "+rowCount);
+			//System.out.println(tableName+" "+rowCount);
 		}
 		conn.close();
 	}

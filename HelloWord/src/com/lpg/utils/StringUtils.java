@@ -42,6 +42,13 @@ public class StringUtils {
 	public static boolean isEmpty(String str) {
 		return null == str || str.isEmpty();
 	}
+	
+	
+	public static void main(String[] args) {
+		String a=" affsf1 1 ";
+		System.out.println(a.length());
+	}
+	
 
 	/**
 	 * 删除文本两端的空白字符

@@ -9,16 +9,19 @@ public class TestConnect {
 
 	public static void main(String[] args) throws Exception {
 		
-		testSelect();
+		for (int i = 0; i < 1000; i++) {
+			Thread.sleep(1000);
+			testSelect();
+		}
 		
 	}
 	
 	public static void testSelect() throws Exception {
 
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/h5_game", "root", "123456");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://119.23.208.59:3306/b", "root", "123456");
 		Statement state = conn.createStatement();
-		String sql = "select * from test";
+		String sql = "select * from bb";
 		ResultSet re = state.executeQuery(sql);
 		//用while而不是用if
 		while (re.next()) {

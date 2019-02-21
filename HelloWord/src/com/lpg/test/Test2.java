@@ -2,6 +2,8 @@ package com.lpg.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 他是在二进制中的问题
@@ -10,41 +12,49 @@ import java.util.List;
  */
 public class Test2 {
 
-	public static void main(String[] args) {
-		
-		//-18623.828383202726
-		//攻击 8492.0 物防穿透 0.0 物理防御 43247.0 技能物理百分比0.5
-		//攻击 8492.0 魔防穿透 0.0魔法防御 1590.0 技能魔法百分比0.0
-		//技能固定值 0.0 固定增伤 0.0  固定减伤[守] 2098.0
-		//暴击系数 1.0 最终伤害加成减免 1.0 伤害浮动值 0.9562695891352071
-		
-		double atk=8492.0;
-		
-		double ppen=0;
-		double pdef=43247.0;
-		double pper=0.5;
-		
-		double mpen=0;
-		double mdef=1590.0;
-		double mper=0.0;
-		
-		double hurt= 0.0 ;
-		double fdmgAdd=0.0;
-		double fdmgRed=2098.0;
-		
-		double critFac=1;
-		double dmgARFac=1;
-		double fac=0.9;
-		
-		
-		double a=(atk + ppen - pdef) * pper;
-		double b=(atk + mpen - mdef) * mper + hurt + fdmgAdd - fdmgRed;
-		double c=critFac * dmgARFac * fac;
-		
-		double result=(a+b) * c;
-		System.out.println("结果是"+ result);
-			
-	}
+	/** 
+    * 正则表达式匹配两个指定字符串中间的内容 
+    * @param soap 
+    * @return 
+    */  
+   public static List<String> getSubUtil(String soap,String rgex){  
+       List<String> list = new ArrayList<String>();  
+       Pattern pattern = Pattern.compile(rgex);// 匹配的模式  
+       Matcher m = pattern.matcher(soap);  
+       while (m.find()) {  
+           int i = 1;  
+           list.add(m.group(i));  
+           i++;  
+       }  
+       return list;  
+   }  
+     
+   /** 
+    * 返回单个字符串，若匹配到多个的话就返回第一个，方法与getSubUtil一样 
+    * @param soap 
+    * @param rgex 
+    * @return 
+    */  
+   public static String getSubUtilSimple(String soap,String rgex){  
+       Pattern pattern = Pattern.compile(rgex);// 匹配的模式  
+       Matcher m = pattern.matcher(soap);  
+       while(m.find()){  
+           return m.group(1);  
+       }  
+       return "";  
+   }  
+     
+   /** 
+    * 测试 
+    * @param args 
+    */  
+   public static void main(String[] args) {
+  
+       String str = "abc3443abcfgjhgabcgfjabc";  
+       String rgex = "\"(.*?)\"";  
+       System.out.println(getSubUtil(str,rgex));  
+       System.out.println(getSubUtilSimple(str, rgex));  
+   }    
 	
 	
 }

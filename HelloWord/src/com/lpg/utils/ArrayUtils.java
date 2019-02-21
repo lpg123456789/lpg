@@ -70,6 +70,14 @@ public class ArrayUtils {
 		return -1;
 	}
 	
+	public static void main(String[] args) {
+		String a="12121aa|2332bb|34cc";
+		int[] arr=strToInts(a, "|");
+		for (int i : arr) {
+			System.out.println(i);
+		}
+	}
+	
 	/**
 	 * 使用二分查询法查询对象索引
 	 * 

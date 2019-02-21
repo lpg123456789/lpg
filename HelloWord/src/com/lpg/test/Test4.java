@@ -12,7 +12,27 @@ public class Test4 {
 	
 	public static void main(String[] args) {
 		
-		test5();
+		String a="1|23|";
+		System.out.println(a.split("\\|").length);
+		
+//		String str="";
+//		System.out.println(str.isEmpty());
+//		
+//		String[] arr=str.split("_");
+//		System.out.println(arr.length);
+//		
+//		for (String string : arr) {
+//			Integer s=Integer.parseInt(string);
+//			System.out.println(s);
+//		}
+		
+		//test5();
+		
+	}
+	
+	//
+	public static void test6(String... parm) {
+		System.out.println(parm.length);
 		
 	}
 	
