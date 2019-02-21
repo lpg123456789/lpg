@@ -7,6 +7,6 @@ import me.gacl.wx.entry.AccessToken;
  */
 public class AccessTokenInfo {
 
-    //注意是静态的
+    //注意是11静态的
     public static AccessToken accessToken = null;
 }
