@@ -14,54 +14,54 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ÏûÏ¢´¦Àí¹¤¾ßÀà
+ * æ¶ˆæ¯å¤„ç†å·¥å…·ç±»
  * Created by xdp on 2016/1/26.
  */
 public class MessageHandlerUtil {
 
     /**
      * 123
-     * ½âÎöÎ¢ĞÅ·¢À´µÄÇëÇó£¨XML£©
+     * è§£æå¾®ä¿¡å‘æ¥çš„è¯·æ±‚ï¼ˆXMLï¼‰
      * @param request
      * @return map
      * @throws Exception
      */
     public static Map<String,String> parseXml(HttpServletRequest request) throws Exception {
-        // ½«½âÎö½á¹û´æ´¢ÔÚHashMapÖĞ
+        // å°†è§£æç»“æœå­˜å‚¨åœ¨HashMapä¸­
         Map<String,String> map = new HashMap();
-        // ´ÓrequestÖĞÈ¡µÃÊäÈëÁ÷
+        // ä»requestä¸­å–å¾—è¾“å…¥æµ
         InputStream inputStream = request.getInputStream();
-        System.out.println("»ñÈ¡ÊäÈëÁ÷");
-        // ¶ÁÈ¡ÊäÈëÁ÷
+        System.out.println("è·å–è¾“å…¥æµ");
+        // è¯»å–è¾“å…¥æµ
         SAXReader reader = new SAXReader();
         Document document = reader.read(inputStream);
-        // µÃµ½xml¸ùÔªËØ
+        // å¾—åˆ°xmlæ ¹å…ƒç´ 
         Element root = document.getRootElement();
-        // µÃµ½¸ùÔªËØµÄËùÓĞ×Ó½Úµã
+        // å¾—åˆ°æ ¹å…ƒç´ çš„æ‰€æœ‰å­èŠ‚ç‚¹
         List<Element> elementList = root.elements();
 
-        // ±éÀúËùÓĞ×Ó½Úµã
+        // éå†æ‰€æœ‰å­èŠ‚ç‚¹
         for (Element e : elementList) {
             System.out.println(e.getName() + "|" + e.getText());
             map.put(e.getName(), e.getText());
         }
 
-        // ÊÍ·Å×ÊÔ´
+        // é‡Šæ”¾èµ„æº
         inputStream.close();
         inputStream = null;
         return map;
     }
 
-    // ¸ù¾İÏûÏ¢ÀàĞÍ ¹¹Ôì·µ»ØÏûÏ¢
+    // æ ¹æ®æ¶ˆæ¯ç±»å‹ æ„é€ è¿”å›æ¶ˆæ¯
     public static String buildXml(Map<String,String> map) {
         String result;
         String msgType = map.get("MsgType").toString();
         System.out.println("MsgType:" + msgType);
         if(msgType.toUpperCase().equals("TEXT")){
-            result = buildTextMessage(map, "¹Â°Á²ÔÀÇÔÚÑ§Ï°ºÍ×Ü½áÎ¢ĞÅ¿ª·¢ÁË,¹¹½¨Ò»ÌõÎÄ±¾ÏûÏ¢:Hello World!");
+            result = buildTextMessage(map, "å­¤å‚²è‹ç‹¼åœ¨å­¦ä¹ å’Œæ€»ç»“å¾®ä¿¡å¼€å‘äº†,æ„å»ºä¸€æ¡æ–‡æœ¬æ¶ˆæ¯:Hello World!");
         }else{
             String fromUserName = map.get("FromUserName");
-            // ¿ª·¢ÕßÎ¢ĞÅºÅ
+            // å¼€å‘è€…å¾®ä¿¡å·
             String toUserName = map.get("ToUserName");
             result = String
                     .format(
@@ -73,26 +73,26 @@ public class MessageHandlerUtil {
                                     "<Content><![CDATA[%s]]></Content>" +
                                     "</xml>",
                             fromUserName, toUserName, getUtcTime(),
-                            "Çë»Ø¸´ÈçÏÂ¹Ø¼ü´Ê£º\nÎÄ±¾\nÍ¼Æ¬\nÓïÒô\nÊÓÆµ\nÒôÀÖ\n¹â");
+                            "è¯·å›å¤å¦‚ä¸‹å…³é”®è¯ï¼š\næ–‡æœ¬\nå›¾ç‰‡\nè¯­éŸ³\nè§†é¢‘\néŸ³ä¹\nå…‰");
         }
 
         return result;
     }
 
     /**
-     * ¹¹ÔìÎÄ±¾ÏûÏ¢
+     * æ„é€ æ–‡æœ¬æ¶ˆæ¯
      *
      * @param map
      * @param content
      * @return
      */
     private static String buildTextMessage(Map<String,String> map, String content) {
-        //·¢ËÍ·½ÕÊºÅ
+        //å‘é€æ–¹å¸å·
         String fromUserName = map.get("FromUserName");
-        // ¿ª·¢ÕßÎ¢ĞÅºÅ
+        // å¼€å‘è€…å¾®ä¿¡å·
         String toUserName = map.get("ToUserName");
         /**
-         * ÎÄ±¾ÏûÏ¢XMLÊı¾İ¸ñÊ½
+         * æ–‡æœ¬æ¶ˆæ¯XMLæ•°æ®æ ¼å¼
          * <xml>
              <ToUserName><![CDATA[toUser]]></ToUserName>
              <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -113,8 +113,8 @@ public class MessageHandlerUtil {
     }
 
     private static String getUtcTime() {
-        Date dt = new Date();// Èç¹û²»ĞèÒª¸ñÊ½,¿ÉÖ±½ÓÓÃdt,dt¾ÍÊÇµ±Ç°ÏµÍ³Ê±¼ä
-        DateFormat df = new SimpleDateFormat("yyyyMMddhhmm");// ÉèÖÃÏÔÊ¾¸ñÊ½
+        Date dt = new Date();// å¦‚æœä¸éœ€è¦æ ¼å¼,å¯ç›´æ¥ç”¨dt,dtå°±æ˜¯å½“å‰ç³»ç»Ÿæ—¶é—´
+        DateFormat df = new SimpleDateFormat("yyyyMMddhhmm");// è®¾ç½®æ˜¾ç¤ºæ ¼å¼
         String nowTime = df.format(dt);
         long dd = (long) 0;
         try {

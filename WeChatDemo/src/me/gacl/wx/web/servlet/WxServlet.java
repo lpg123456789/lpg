@@ -15,23 +15,23 @@ import me.gacl.wx.util.MessageHandlerUtil;
 public class WxServlet extends HttpServlet {
 
 	/**
-	 * Token¿ÉÓÉ¿ª·¢Õß¿ÉÒÔÈÎÒâÌîĞ´£¬ÓÃ×÷Éú³ÉÇ©Ãû£¨¸ÃToken»áºÍ½Ó¿ÚURLÖĞ°üº¬µÄToken½øĞĞ±È¶Ô£¬´Ó¶øÑéÖ¤°²È«ĞÔ£©
-	 * ±ÈÈçÕâÀïÎÒ½«TokenÉèÖÃÎªgacl
+	 * Tokenå¯ç”±å¼€å‘è€…å¯ä»¥ä»»æ„å¡«å†™ï¼Œç”¨ä½œç”Ÿæˆç­¾åï¼ˆè¯¥Tokenä¼šå’Œæ¥å£URLä¸­åŒ…å«çš„Tokenè¿›è¡Œæ¯”å¯¹ï¼Œä»è€ŒéªŒè¯å®‰å…¨æ€§ï¼‰
+	 * æ¯”å¦‚è¿™é‡Œæˆ‘å°†Tokenè®¾ç½®ä¸ºgacl
 	 */
 	private final String TOKEN = "gacl";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("¿ªÊ¼Ğ£ÑéÇ©Ãû");
+		System.out.println("å¼€å§‹æ ¡éªŒç­¾å");
 		/**
-		 * ½ÓÊÕÎ¢ĞÅ·şÎñÆ÷·¢ËÍÇëÇóÊ±´«µİ¹ıÀ´µÄ4¸ö²ÎÊı
+		 * æ¥æ”¶å¾®ä¿¡æœåŠ¡å™¨å‘é€è¯·æ±‚æ—¶ä¼ é€’è¿‡æ¥çš„4ä¸ªå‚æ•°
 		 */
-		String signature = request.getParameter("signature");// Î¢ĞÅ¼ÓÃÜÇ©Ãûsignature½áºÏÁË¿ª·¢ÕßÌîĞ´µÄtoken²ÎÊıºÍÇëÇóÖĞµÄtimestamp²ÎÊı¡¢nonce²ÎÊı¡£
-		String timestamp = request.getParameter("timestamp");// Ê±¼ä´Á
-		String nonce = request.getParameter("nonce");// Ëæ»úÊı
-		String echostr = request.getParameter("echostr");// Ëæ»ú×Ö·û´®
+		String signature = request.getParameter("signature");// å¾®ä¿¡åŠ å¯†ç­¾åsignatureç»“åˆäº†å¼€å‘è€…å¡«å†™çš„tokenå‚æ•°å’Œè¯·æ±‚ä¸­çš„timestampå‚æ•°ã€nonceå‚æ•°ã€‚
+		String timestamp = request.getParameter("timestamp");// æ—¶é—´æˆ³
+		String nonce = request.getParameter("nonce");// éšæœºæ•°
+		String echostr = request.getParameter("echostr");// éšæœºå­—ç¬¦ä¸²
 
-		System.out.println("½ÓÊÜÎ¢ĞÅµÄÖµ111  " + signature + " " + timestamp + " " + nonce + " " + echostr);
+		System.out.println("æ¥å—å¾®ä¿¡çš„å€¼111  " + signature + " " + timestamp + " " + nonce + " " + echostr);
 
 		response.getWriter().println(echostr);
 		//response.getWriter().write(echostr);
@@ -39,24 +39,24 @@ public class WxServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO ½ÓÊÕ¡¢´¦Àí¡¢ÏìÓ¦ÓÉÎ¢ĞÅ·şÎñÆ÷×ª·¢µÄÓÃ»§·¢ËÍ¸ø¹«ÖÚÕÊºÅµÄÏûÏ¢
-        // ½«ÇëÇó¡¢ÏìÓ¦µÄ±àÂë¾ùÉèÖÃÎªUTF-8£¨·ÀÖ¹ÖĞÎÄÂÒÂë£©
+		// TODO æ¥æ”¶ã€å¤„ç†ã€å“åº”ç”±å¾®ä¿¡æœåŠ¡å™¨è½¬å‘çš„ç”¨æˆ·å‘é€ç»™å…¬ä¼—å¸å·çš„æ¶ˆæ¯
+        // å°†è¯·æ±‚ã€å“åº”çš„ç¼–ç å‡è®¾ç½®ä¸ºUTF-8ï¼ˆé˜²æ­¢ä¸­æ–‡ä¹±ç ï¼‰
 		
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        System.out.println("ÇëÇó½øÈë");
+        System.out.println("è¯·æ±‚è¿›å…¥");
         String result = "";
         try {
             Map<String,String> map = MessageHandlerUtil.parseXml(request);
-            System.out.println("¿ªÊ¼¹¹ÔìÏûÏ¢");
+            System.out.println("å¼€å§‹æ„é€ æ¶ˆæ¯");
             result = MessageHandlerUtil.buildXml(map);
             System.out.println(result);
             if(result.equals("")){
-                result = "Î´ÕıÈ·ÏìÓ¦";
+                result = "æœªæ­£ç¡®å“åº”";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("·¢ÉúÒì³££º"+ e.getMessage());
+            System.out.println("å‘ç”Ÿå¼‚å¸¸ï¼š"+ e.getMessage());
         }
         response.getWriter().println(result);
 	}

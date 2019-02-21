@@ -1,14 +1,14 @@
 package me.gacl.wx.entry;
 
 /**
- * AccessTokenµÄÊı¾İÄ£ĞÍ
+ * AccessTokençš„æ•°æ®æ¨¡å‹
  * Created by xdp on 2016/1/25.
  */
 public class AccessToken {
 
-    //»ñÈ¡µ½µÄÆ¾Ö¤
+    //è·å–åˆ°çš„å‡­è¯
     private String accessToken;
-    //Æ¾Ö¤ÓĞĞ§Ê±¼ä£¬µ¥Î»£ºÃë
+    //å‡­è¯æœ‰æ•ˆæ—¶é—´ï¼Œå•ä½ï¼šç§’
     private int expiresin;
 
     public String getAccessToken() {
