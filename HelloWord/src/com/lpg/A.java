@@ -17,7 +17,7 @@ public abstract class A {
 		@Override
 		public void aa() {
 			// TODO Auto-generated method stub
-			
+			System.out.println("aaa");
 		}
 		
 	}
