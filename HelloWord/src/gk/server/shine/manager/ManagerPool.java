@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 import gk.common.shine.component.GameService;
+import gk.common.shine.event.GameEvent;
 import gk.server.shine.data.manager.DataManager;
 import gk.server.shine.func.a.manager.AManager;
 import gk.server.shine.func.b.manager.BManager;
+import gk.server.shine.manager.event.GameEventManager;
 import gk.server.shine.manager.exception.ServerStarupError;
 
 public class ManagerPool extends GameService {
@@ -27,6 +29,11 @@ public class ManagerPool extends GameService {
 	private ManagerPool() {
 
 	}
+	
+	 /**
+     * 全局游戏事件管理类
+     */
+    private final GameEventManager gameEventManager = new GameEventManager();
 
 	public AManager aManager;
 
@@ -99,6 +106,9 @@ public class ManagerPool extends GameService {
         serviceMap.put(clazz, service);
         return service;
     }
+    
+    
+    
 
 	@Override
 	public void ready() throws Exception {
@@ -115,4 +125,22 @@ public class ManagerPool extends GameService {
 		
 	}
 
+	
+	  /**
+     * 派发事件<br>
+     * 派发给全局事件监听<br>
+     * 若只有公共模块需要监听该事件 则使用该接口<br>
+     * 阻塞处理
+     * 
+     * @param gameEvent
+     */
+    public void fireGameEvent(GameEvent gameEvent) {
+        gameEventManager.receiveGameEvent(gameEvent);
+    }
+
+    public GameEventManager getGameEventManager() {
+        return gameEventManager;
+    }
+
+	
 }

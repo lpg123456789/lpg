@@ -1,6 +1,8 @@
 package gk.common.shine.component;
 
-public interface Component {
+import gk.common.shine.event.GameEventListener;
+
+public interface Component extends GameEventListener{
 	 /**
      * 初始化<br>
      * 执行不需要依赖其他模块的代码

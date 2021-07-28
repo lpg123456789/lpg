@@ -9,9 +9,14 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
+import org.quartz.CronScheduleBuilder;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +24,14 @@ import org.slf4j.LoggerFactory;
 import gk.common.shine.command.Handler;
 import gk.common.shine.message.Message;
 import gk.common.shine.mina.impl.MinaServer;
+import gk.common.shine.server.thread.ServerThread;
 import gk.server.shine.Globals;
 import gk.server.shine.manager.ManagerPool;
 import gk.server.shine.manager.exception.ServerStarupError;
 import gk.server.shine.message.MessagePool;
 import gk.server.shine.persistence.manager.SaverManager;
+import gk.server.shine.server.task.EverydayReTask;
+import gk.server.shine.server.timer.ServerInfoTimer;
 
 public class GameServer extends MinaServer {
 	
@@ -49,6 +57,9 @@ public class GameServer extends MinaServer {
     SchedulerFactory schedulerFactory = null;
     // 调度器
     private Scheduler scheduler = null;
+    
+    // 服务器线程 （用来处理一些玩家共享数据的操作）
+    private ServerThread serverThread;
 
 	private GameServer() {
 		this(Globals.properties);
@@ -87,20 +98,41 @@ public class GameServer extends MinaServer {
 
 	private void startup() {
 		
+		serverThread = new ServerThread("mainThread", 1000);
+	    serverThread.start();
+	    serverThread.addTimerEvent(new ServerInfoTimer());
+		
+	    
 		SaverManager.getInstance().startup();
 		
 		// 玩家处理线程分区 10个
         for (int i = 1; i < 2; i++) {
-            int id = i + 1;
-            addNewPlayerThread(id);
+            addNewPlayerThread(i);
         }
-		
 		ManagerPool.getInstance().init();
+		 // 将定时任务移至各模块初始化之后
+        startTimer();
 		// 开始监听
 		super.run();
 		status = ServerState.RUN;
 		log.info("server|logic|start success");
 	}
+	
+	 private void startTimer() {
+		try {
+			// 创建Trigger 每日零点执行
+			JobDetail jobDetail1 = JobBuilder.newJob(EverydayReTask.class).withIdentity("EverydayTask", "one").build();
+			// 秒 分 时 每月几号 月 周几 年
+			CronScheduleBuilder builder1 = CronScheduleBuilder.cronSchedule("1 0 0 * * ?");
+			Trigger trigger1 = TriggerBuilder.newTrigger().startNow().withSchedule(builder1).build();
+
+			scheduler.scheduleJob(jobDetail1, trigger1);
+			scheduler.start();
+		} catch (Exception e) {
+			log.error("start timer fail.", e);
+			throw new ServerStarupError();
+		}
+	 }
 	
 	
 	 /**
@@ -151,7 +183,7 @@ public class GameServer extends MinaServer {
 	public void doCommand(IoSession iosession, IoBuffer paramIoBuffer) {
 		// TODO Auto-generated method stub
 		try {
-         			String str = paramIoBuffer.getString(decoder).trim();
+         	 String str = paramIoBuffer.getString(decoder).trim();
 			 log.info("doCommand:" + str);
 			 
 			 //没有加密 简单处理
@@ -179,7 +211,7 @@ public class GameServer extends MinaServer {
 	}
 	
 	public void handleMessage(Message msg, IoSession session) {
-
+		
 	}
 
 	@Override

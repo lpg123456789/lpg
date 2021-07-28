@@ -1,6 +1,9 @@
 package gk.server.shine.func.b.manager;
 
 import gk.common.shine.component.GameService;
+import gk.common.shine.event.GameEvent;
+import gk.common.shine.event.impl.AEvent;
+import gk.server.shine.manager.ManagerPool;
 import gk.server.shine.persistence.bean.GroupData;
 import gk.server.shine.persistence.manager.SaverManager;
 
@@ -8,7 +11,7 @@ public class BManager extends GameService {
 
 	@Override
 	public void init() throws Exception {
-		System.out.println("bbbbbbbbbb");
+		ManagerPool.getInstance().getGameEventManager().registerListener(AEvent.Id, this);
 	}
 
 	//异步保存
@@ -24,5 +27,15 @@ public class BManager extends GameService {
 			logger.error("save academy error", e);
 		}
 	}
+
+	@Override
+	public void handleGameEvent(GameEvent gameEvent) {
+		if(gameEvent instanceof AEvent) {
+			logger.error("AEvent ");
+		}else {
+			logger.error("gameEvent");
+		}
+	}
+	
 
 }

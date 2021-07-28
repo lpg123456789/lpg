@@ -25,7 +25,7 @@ public class MinaClient {
 		future.awaitUninterruptibly();//等待我們的連接
 
 		session = future.getSession();		
-		session.write("3_贝吉塔");
+		session.write("4_贝吉塔");
 		session.getCloseFuture().awaitUninterruptibly();//等待關閉連接
 		connector.dispose();
 	}

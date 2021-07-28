@@ -6,8 +6,10 @@ import gk.common.shine.command.Handler;
 import gk.common.shine.message.Message;
 import gk.server.shine.func.a.handler.AHandler;
 import gk.server.shine.func.a.handler.TestConfigHandler;
+import gk.server.shine.func.a.handler.TestEventHandler;
 import gk.server.shine.func.a.message.AMessage;
 import gk.server.shine.func.a.message.TestConfigMessage;
+import gk.server.shine.func.a.message.TestEventMessage;
 import gk.server.shine.func.b.handler.BHandler;
 import gk.server.shine.func.b.message.BMessage;
 
@@ -63,6 +65,7 @@ public class MessagePool {
 		register(1, AHandler.class, AMessage.class);
 		register(2, BHandler.class, BMessage.class);
 		register(3, TestConfigHandler.class, TestConfigMessage.class);
+		register(4, TestEventHandler.class, TestEventMessage.class);
 	}
 
 }

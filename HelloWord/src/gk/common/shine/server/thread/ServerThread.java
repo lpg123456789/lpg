@@ -55,6 +55,11 @@ public class ServerThread extends Thread {
 	@Override
 	public void run() {
 		log.info("[" + threadName + "]Thread start");
+		
+		 // 间隔时间大于0 时间管理线程开始
+        if (this.getHeart() > 0 && this.timer != null) {
+            this.timer.start();
+        }
 
 		this.stop = false;
 		// 循环执行的次数
