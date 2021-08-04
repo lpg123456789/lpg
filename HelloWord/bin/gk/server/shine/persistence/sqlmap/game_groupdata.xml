@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+      
+    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="game_groupdata">
+
+	<resultMap id="groupData" type="GroupData">
+	</resultMap>
+
+	<select id="selectAll" resultType="GroupData">
+		select * from groupdata;
+	</select>
+	<select id="select" parameterType="int" resultType="GroupData">
+		select * from groupdata where dataId=#{dataId}
+	</select>
+	<insert id="insert" parameterType="GroupData">
+		insert into groupdata(dataId,data) values (#{dataId},#{data})
+	</insert>
+	<update id="update" parameterType="GroupData">
+		update groupdata set data=#{data} where dataId = #{dataId}
+	</update>
+	<insert id="save" parameterType="GroupData">
+		replace into groupdata(dataId,data) values (#{dataId},#{data})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE configuration 
+  PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" 
+  "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">  
+<configuration>
+  <settings>
+	<setting name="defaultStatementTimeout" value="60"/>
+  </settings>
+  <typeAliases>
+        <typeAlias type="com.game.db.bean.RankDBData" alias="RankDBData"/>
+        <typeAlias type="com.game.db.bean.UserDBData" alias="UserDBData"/>
+        <typeAlias type="com.game.db.bean.CmShowDBData" alias="CmShowDBData"/>
+        <typeAlias type="com.game.db.bean.GroupDBData" alias="GroupDBData"/>
+        <typeAlias type="com.game.db.bean.ActivityRoomDBData" alias="ActivityRoomDBData"/>
+         <typeAlias type="com.game.db.bean.VerifyNameDBData" alias="VerifyNameDBData"/>
+      <typeAlias type="com.game.db.bean.WxInviteDbData" alias="WxInviteDbData"/>
+      <typeAlias type="com.game.db.bean.BindPhoneDBData" alias="BindPhoneDBData"/>
+       <typeAlias type="com.game.db.bean.VerifyDeviceDBData" alias="VerifyDeviceDBData"/>
+</typeAliases>
+
+	<typeHandlers>
+		<!--当配置package的时候，mybatis会去配置的package扫描TypeHandler -->
+		<package name="com.game.db.persistence"></package>
+	</typeHandlers>
+
+  <environments default="development"> 
+      <environment id="development"> 
+      <transactionManager type="JDBC"/> 
+      <dataSource type="POOLED"> 
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+          value="jdbc:mysql://${cross.db.host}:${cross.db.port}/${cross.db.name}?autoReconnect=true&amp;characterEncoding=utf8" />
+        <property name="username" value="${cross.db.user}" />
+        <property name="password" value="${cross.db.pass}" />
+        <property name="poolPingQuery" value="select 1"/>
+        <property name="poolPingEnabled" value="true"/>
+        <property name="poolPingConnectionsNotUsedFor" value="3600000"/>
+      </dataSource> 
+    </environment> 
+  </environments> 
+  <mappers>
+    <mapper resource="com/game/db/sqlmap/game_rank.xml"/>
+    <mapper resource="com/game/db/sqlmap/game_user.xml"/>
+    <mapper resource="com/game/db/sqlmap/game_cm_show.xml"/>
+    <mapper resource="com/game/db/sqlmap/game_groupdata.xml"/>
+    <mapper resource="com/game/db/sqlmap/game_activity_room.xml"/>
+    <mapper resource="com/game/db/sqlmap/game_verify_name.xml"/>
+    <mapper resource="com/game/db/sqlmap/game_wx_invite.xml"/>
+    <mapper resource="com/game/db/sqlmap/game_bind_phone.xml"/>
+    <mapper resource="com/game/db/sqlmap/game_verify_device.xml"/>
+  </mappers>
+  
+</configuration> 

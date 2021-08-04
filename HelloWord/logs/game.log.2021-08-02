@@ -1,0 +1,20 @@
+2021-08-02 10:15:34,849 [main                ] [CrossMain.java                     :22  ] [INFO] [] server|cross|start...
+2021-08-02 10:15:35,299 [Thread-0            ] [EchoServer.java                    :60  ] [INFO] [] Echo Server Start At Port 9011
+2021-08-02 10:15:35,300 [Thread-0            ] [ConsoleServer.java                 :45  ] [INFO] [] server|cross|start success
+2021-08-02 10:15:38,896 [main                ] [CrossMain.java                     :22  ] [INFO] [] server|cross|start...
+2021-08-02 10:15:39,192 [Thread-0            ] [EchoServer.java                    :60  ] [INFO] [] Echo Server Start At Port 9011
+2021-08-02 10:15:39,193 [Thread-0            ] [ConsoleServer.java                 :45  ] [INFO] [] server|cross|start success
+2021-08-02 10:17:22,662 [main                ] [CrossMain.java                     :22  ] [INFO] [] server|cross|start...
+2021-08-02 10:17:22,958 [Thread-0            ] [EchoServer.java                    :60  ] [INFO] [] Echo Server Start At Port 9011
+2021-08-02 10:17:22,959 [Thread-0            ] [ConsoleServer.java                 :45  ] [INFO] [] server|cross|start success
+2021-08-02 10:17:37,339 [main                ] [CrossMain.java                     :22  ] [INFO] [] server|cross|start...
+2021-08-02 10:17:37,634 [Thread-0            ] [EchoServer.java                    :60  ] [INFO] [] Echo Server Start At Port 9012
+2021-08-02 10:17:37,635 [Thread-0            ] [ConsoleServer.java                 :45  ] [INFO] [] server|cross|start success
+2021-08-02 12:11:03,334 [main                ] [CrossMain.java                     :23  ] [INFO] [] server|cross|start...
+2021-08-02 12:11:03,626 [Thread-0            ] [EchoServer.java                    :60  ] [INFO] [] Echo Server Start At Port 9012
+2021-08-02 12:11:03,627 [Thread-0            ] [ConsoleServer.java                 :45  ] [INFO] [] server|cross|start success
+2021-08-02 12:11:03,626 [Thread-2            ] [InnerServer.java                   :150 ] [INFO] [] Inner Server Start At Port 7005
+2021-08-02 12:15:21,356 [pool-5-thread-1     ] [ConsoleServer.java                 :58  ] [INFO] [] recv console:to
+2021-08-02 12:15:21,358 [pool-5-thread-1     ] [ConsoleServer.java                 :60  ] [INFO] [] resp console:test
+2021-08-02 12:15:29,365 [pool-5-thread-1     ] [ConsoleServer.java                 :58  ] [INFO] [] recv console:aaa
+2021-08-02 12:15:29,365 [pool-5-thread-1     ] [ConsoleServer.java                 :60  ] [INFO] [] resp console:test
