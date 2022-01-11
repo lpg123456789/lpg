@@ -46,6 +46,8 @@ public class FastJsonTwo {
 
 		String str4 = JsonUtil.toJson(obj);
 		System.out.println(str4);
+		
+		111
 	}
 	
 	public static void a() {

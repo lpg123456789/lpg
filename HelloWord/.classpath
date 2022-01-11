@@ -34,8 +34,15 @@
 	<classpathentry kind="lib" path="lib/jackson-all-1.9.9.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-annotations-2.9.0.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-2.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/fastjson-1.2.58.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.10.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-databind-2.7.4.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-databind-2.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-net-3.3.jar"/>
+	<classpathentry kind="lib" path="lib/jsch-0.1.54.jar"/>
+	<classpathentry kind="lib" path="lib/guava-30.1.1-jre.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
