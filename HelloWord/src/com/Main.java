@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -20,7 +23,47 @@ import io.netty.handler.codec.http.HttpResponse;
 public class Main {
 
 	public static void main(String[] args) {
-		test();
+		
+		Float a=1.1f;
+		System.out.println(a);
+		
+		  
+		a+=1.2f;
+		System.out.println(a);
+		
+		System.out.println(a.intValue());
+		/*	        Calendar ca = Calendar.getInstance();
+			        TimeZone tz = ca.getTimeZone();
+			        System.out.println(tz.getID()+" "+tz.getDisplayName());*/
+		        
+		/*   int a=0 | 1 << 0;
+		   
+		   System.out.println(1<<2);
+		   
+		   System.out.println(a);*/
+		       
+		/*int day=5;
+		 //int state = 1;
+		  int a = (1 << day)-1;
+		 System.out.println(Integer.toBinaryString(a)+" "+a);
+		 
+		 int c=a | a + 1;
+		 
+		 System.out.println(Integer.toBinaryString(c)+" "+c);
+		 
+		 int b = (1 << day);
+		 System.out.println(Integer.toBinaryString(b)+" "+b);
+		 
+		 int d=b | b + 1;
+		 System.out.println(Integer.toBinaryString(d)+" "+d);*/
+		
+		/* int e=(1 << 4)-1;
+		 System.out.println(Integer.toBinaryString(13)+" "+13);
+		 
+		 int g=13 | 13 + 1;
+		 System.out.println(Integer.toBinaryString(g)+" "+g);*/
+		
+		
 	}
 
 	public static void readFile() {
