@@ -17,7 +17,7 @@ public class ServerStart {
 			
 		}else if(args.length==1){
 			new Thread(WServer.getInstance()).start();
-			if(args[0].startsWith("stid")) WServer.startidentity = args[0]; //记录启动标示
+			if(args[0].startsWith("stid")) WServer.startidentity = args[0]; //11记录启动标示
 		}else if(args.length==2){
 			new Thread(WServer.getInstance(args[0], args[1])).start();
 			
