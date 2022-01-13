@@ -17,7 +17,7 @@ public class ServerStart {
 			
 		}else if(args.length==1){
 			new Thread(WServer.getInstance()).start();
-			if(args[0].startsWith("s11ti11d")) WServer.startidentity = args[0]; //11aa记录启动标示
+			if(args[0].startsWith("11")) WServer.startidentity = args[0]; //11aa记录启动标示
 		}else if(args.length==2){
 			new Thread(WServer.getInstance(args[0], args[1])).start();
 			
